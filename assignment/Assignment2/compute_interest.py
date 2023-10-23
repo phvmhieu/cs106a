@@ -16,7 +16,9 @@ def compute(initial_balance, start_year, start_month, end_year, end_month, inter
             temp_month = end_month + 1
         for j in range(start_month, temp_month):
             print("Year ", i, " month ", j, " balance: ", sum_balance)
+            # tính số tiền lãi
             amount_of_interest = sum_balance * interest_rate
+            # cập nhập số dư
             sum_balance = sum_balance + amount_of_interest
             if(j == 12):
                 # chạy từ start_month đến t12 sẽ chuyển về t1 cho năm mới
