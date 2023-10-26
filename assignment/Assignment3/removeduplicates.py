@@ -13,7 +13,14 @@ def read_list():
     (until the user enters 0 to stop) and store all those values in a
     list.  That list should then be returned by this function.
     """
-    pass
+    new_list = []
+    while(True):
+        temp = input("Enter value (0 to stop): ")
+        temp = int(temp)
+        if(temp == 0):
+            break
+        new_list.append(temp)
+    return new_list
 
 
 def remove_duplicates(num_list):
@@ -27,8 +34,15 @@ def remove_duplicates(num_list):
     >>> remove_duplicates([])
     []
     """
-    pass
-
+    # unique_list = list(dict.fromkeys(num_list))
+    # return unique_list
+    unique_list = []
+    #duyệt qua từng elem trong num_list
+    for elem in num_list:
+        if(unique_list.count(elem) == 0):
+            #đếm xem trong unique_list đã có phần tử elem chưa để thêm vào
+            unique_list.append(elem)
+    return unique_list
 
 def main():
     num_list = read_list()
