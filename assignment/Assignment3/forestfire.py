@@ -35,9 +35,33 @@ def highlight_fires(filename):
     """
     image = SimpleImage(filename)
     # Your code to highlight the fires goes here
-
+    for pixel in image:
+        # Tìm ngưỡng cường độ của ảnh
+        average = (pixel.red + pixel.green + pixel.blue) // 3
+        average *= INTENSITY_THRESHOLD
+        if(pixel.red >= average):
+            pixel.red = 255
+            pixel.green = 0
+            pixel.blue = 0
+        else:
+            x = pixel.x
+            y = pixel.y
+            tmp_pixel = grayscale(pixel)
+            image.set_pixel(x, y, tmp_pixel)
     return image
 
+def compute_luminosity (red, green, blue):
+    # Sử dụng các trọng số để tính độ sáng của điểm màu
+    return (0.299 * red) + (0.587 * green) + (0.114 * blue)
+
+
+def grayscale(filename):
+    pixel = filename
+    luminosity = compute_luminosity(pixel.red, pixel.green, pixel.blue)
+    pixel.red = luminosity
+    pixel.green = luminosity
+    pixel.blue = luminosity
+    return pixel
 
 def main():
     """
