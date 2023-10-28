@@ -39,10 +39,10 @@ def highlight_fires(filename):
         # Tìm ngưỡng cường độ của ảnh
         average = (pixel.red + pixel.green + pixel.blue) // 3
         average *= INTENSITY_THRESHOLD
+        # Nếu lớn hơn thì đổi sang màu đỏ
         if(pixel.red >= average):
-            pixel.red = 255
-            pixel.green = 0
-            pixel.blue = 0
+            pixel = set_color(pixel, 255, 0, 0)
+        # Nhỏ hơn thì đổi sang đen trắng
         else:
             x = pixel.x
             y = pixel.y
@@ -57,10 +57,16 @@ def compute_luminosity (red, green, blue):
 
 def grayscale(filename):
     pixel = filename
+    # set điểm ảnh khi tìm được độ sáng của điểm ảnh
     luminosity = compute_luminosity(pixel.red, pixel.green, pixel.blue)
-    pixel.red = luminosity
-    pixel.green = luminosity
-    pixel.blue = luminosity
+    pixel = set_color(pixel, luminosity, luminosity, luminosity)
+    return pixel
+
+def set_color(filename, red, green, blue):
+    pixel = filename
+    pixel.red = red
+    pixel.green = green
+    pixel.blue = blue
     return pixel
 
 def main():
